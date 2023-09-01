@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="mt-3 reset">
-      <button class="btn btn-primary" v-if="count == letters.length" @click="onReset">
+      <button class="btn btn-primary" v-if="count > 0" @click="onReset">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
           <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
@@ -10,7 +10,11 @@
       </button>
     </div>
     <div class="word">
-      <div class="letter" v-for="letter in letters" :key="letter.index">
+      <div
+        :key="index"
+        :class="count == index ? 'active letter' : 'letter'"
+        v-for="(letter, index) in letters"
+      >
         {{ letter }}
       </div>
     </div>
@@ -19,32 +23,67 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import SimpleKeyboard from "./components/SimpleKeyboard";
+
+const words = [
+  'apple',
+  'banana',
+  'cherry',
+  'grape',
+  'lemon',
+  'mango',
+  'orange',
+  'pineapple',
+  'peach',
+  'pear',
+  'strawberry',
+  'watermelon',
+];
 
 export default {
   name: "App",
   components: {
     SimpleKeyboard
   },
-  data: () => ({
-    letters: ['', '', ''],
-    count: 0
-  }),
+  setup: () => {
+    const word = words[Math.floor(Math.random() * (words.length - 1))];
+
+    const rand = Math.floor(Math.random() * (word.length - 2)) + 1;
+
+    let letters = [];
+    for (let i = 0; i < word.length; i++) {
+      if (rand == i) {
+        letters.push(word[i]);
+      } else {
+        letters.push('');
+      }
+    }
+
+    const count = ref(0)
+
+    return {
+      word,
+      letters,
+      rand,
+      count
+    }
+  },
   methods: {
     onKeyPress(button) {
       if (this.count < this.letters.length) {
-        let letters = this.letters;
-        letters[this.count] = button;
-        this.letters = letters;
+        this.letters[this.count] = button;
         this.count++;
       }
     },
     onReset() {
-      let letters = [];
       for (let i = 0; i < this.letters.length; i++) {
-        letters.push('');
+        if (this.rand == i) {
+          this.letters[i] = this.word[i];
+        } else {
+          this.letters[i] = '';
+        }
       }
-      this.letters = letters;
 
       this.count = 0;
     },
@@ -89,6 +128,9 @@ body {
   margin: 10px;
   text-align: center;
   width: 50px;
+}
+.letter.active {
+  border-bottom: 2px solid black;
 }
 .simple-keyboard {
   background-color: rgba(0, 0, 0, 0.5);
