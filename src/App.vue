@@ -49,11 +49,18 @@ export default {
   setup: () => {
     const word = words[Math.floor(Math.random() * (words.length - 1))];
 
-    const rand = Math.floor(Math.random() * (word.length - 2)) + 1;
+    const rand1 = Math.floor(Math.random() * (word.length - 2)) + 1;
+    let rand2 = -1;
+    if (word.length > 4) {
+      rand2 = rand1;
+      while (rand1 == rand2) {
+        rand2 = Math.floor(Math.random() * (word.length - 2)) + 1;
+      }
+    }
 
     let letters = [];
     for (let i = 0; i < word.length; i++) {
-      if (rand == i) {
+      if (rand1 == i || rand2 == i) {
         letters.push(word[i]);
       } else {
         letters.push('');
@@ -65,7 +72,8 @@ export default {
     return {
       word,
       letters,
-      rand,
+      rand1,
+      rand2,
       count
     }
   },
@@ -78,7 +86,7 @@ export default {
     },
     onReset() {
       for (let i = 0; i < this.letters.length; i++) {
-        if (this.rand == i) {
+        if (this.rand1 == i || this.rand2 == i) {
           this.letters[i] = this.word[i];
         } else {
           this.letters[i] = '';
