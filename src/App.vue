@@ -81,6 +81,12 @@ export default {
     onKeyPress(button) {
       if (this.count < this.letters.length) {
         this.letters[this.count] = button;
+        if (this.rand1 == this.count + 1 || this.rand2 == this.count + 1) {
+          this.count++;
+          if (this.rand1 == this.count + 1 || this.rand2 == this.count + 1) {
+            this.count++;
+          }
+        }
         this.count++;
       }
     },
