@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    Home page
+    <div class="loading">
+      <img v-bind:src="require('../assets/home.png')" />
+    </div>
   </div>
 </template>
 
@@ -9,3 +11,11 @@ export default {
   name: "HomePage"
 };
 </script>
+
+<style lang="less">
+.loading {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+</style>
