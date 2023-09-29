@@ -1,14 +1,27 @@
 <template>
   <div class="container">
-    <div class="loading">
+    <div class="loading" v-if="loading">
       <img v-bind:src="require('../assets/home.png')" />
+    </div>
+    <div v-else>
+
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HomePage"
+  name: "HomePage",
+  data() {
+    return {
+      loading: true
+    }
+  },
+  created() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 1500);
+  }
 };
 </script>
 
