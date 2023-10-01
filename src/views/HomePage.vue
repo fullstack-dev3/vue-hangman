@@ -13,6 +13,7 @@
           aria-valuemax="100"
           :style="'width: ' + percent + '%'"
         >
+          {{ percent == 100 ? 'Loading...' : '' }}
         </div>
       </div>
     </div>
@@ -28,7 +29,7 @@ export default {
   data() {
     return {
       loading: true,
-      percent: 0
+      percent: 10
     }
   },
   created() {
