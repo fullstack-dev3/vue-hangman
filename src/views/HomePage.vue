@@ -125,7 +125,7 @@
           </div>
         </div>
       </div>
-      <div class="button" v-if="category != ''" />
+      <div class="button" v-if="category != ''" @click="goToPlay" />
     </div>
   </div>
 </template>
@@ -155,8 +155,10 @@ export default {
   },
   methods: {
     onSetCategory(value) {
-      console.log(value)
       this.category = value;
+    },
+    goToPlay() {
+      this.$router.push('/playnow')
     }
   }
 };
