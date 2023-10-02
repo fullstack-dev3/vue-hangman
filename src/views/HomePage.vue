@@ -20,80 +20,112 @@
     <div class="play" v-else>
       <h1 class="title text-center pt-5">Select Category</h1>
       <div class="content d-flex flex-wrap p-3 justify-content-center">
-        <div class="category d-flex flex-column justify-content-between text-center">
+        <div
+          class="category d-flex flex-column justify-content-between text-center"
+          @click="onSetCategory('animals')"
+        >
           <div>
             <img src="../assets/animals.png" />
           </div>
           <div class="d-flex align-items-center justify-content-center">
-            <img src="../assets/check.png" />
+            <img src="../assets/checked.png" v-if="category == 'animals'" />
+            <img src="../assets/check.png" v-else />
             <h3 class="name">Animals</h3>
           </div>
         </div>
-        <div class="category d-flex flex-column justify-content-between text-center">
+        <div
+          class="category d-flex flex-column justify-content-between text-center"
+          @click="onSetCategory('colors')"
+        >
           <div>
             <img src="../assets/colors.png" />
           </div>
           <div class="d-flex align-items-center justify-content-center">
-            <img src="../assets/check.png" />
+            <img src="../assets/checked.png" v-if="category == 'colors'" />
+            <img src="../assets/check.png" v-else />
             <h3 class="name">Colors</h3>
           </div>
         </div>
-        <div class="category d-flex flex-column justify-content-between text-center">
+        <div
+          class="category d-flex flex-column justify-content-between text-center"
+          @click="onSetCategory('foods')"
+        >
           <div>
             <img src="../assets/foods.png" />
           </div>
           <div class="d-flex align-items-center justify-content-center">
-            <img src="../assets/check.png" />
+            <img src="../assets/checked.png" v-if="category == 'foods'" />
+            <img src="../assets/check.png" v-else />
             <h3 class="name">Foods</h3>
           </div>
         </div>
-        <div class="category d-flex flex-column justify-content-between text-center">
+        <div
+          class="category d-flex flex-column justify-content-between text-center"
+          @click="onSetCategory('fruits')"
+        >
           <div>
             <img src="../assets/fruits.png" />
           </div>
           <div class="d-flex align-items-center justify-content-center">
-            <img src="../assets/check.png" />
+            <img src="../assets/checked.png" v-if="category == 'fruits'" />
+            <img src="../assets/check.png" v-else />
             <h3 class="name">Fruits</h3>
           </div>
         </div>
-        <div class="category d-flex flex-column justify-content-between text-center">
+        <div
+          class="category d-flex flex-column justify-content-between text-center"
+          @click="onSetCategory('jobs')"
+        >
           <div>
             <img src="../assets/jobs.png" />
           </div>
           <div class="d-flex align-items-center justify-content-center">
-            <img src="../assets/check.png" />
+            <img src="../assets/checked.png" v-if="category == 'jobs'" />
+            <img src="../assets/check.png" v-else />
             <h3 class="name">Jobs</h3>
           </div>
         </div>
-        <div class="category d-flex flex-column justify-content-between text-center">
+        <div
+          class="category d-flex flex-column justify-content-between text-center"
+          @click="onSetCategory('shapes')"
+        >
           <div>
             <img src="../assets/shapes.png" />
           </div>
           <div class="d-flex align-items-center justify-content-center">
-            <img src="../assets/check.png" />
+            <img src="../assets/checked.png" v-if="category == 'shapes'" />
+            <img src="../assets/check.png" v-else />
             <h3 class="name">Shapes</h3>
           </div>
         </div>
-        <div class="category d-flex flex-column justify-content-between text-center">
+        <div
+          class="category d-flex flex-column justify-content-between text-center"
+          @click="onSetCategory('sports')"
+        >
           <div>
             <img src="../assets/sports.png" />
           </div>
           <div class="d-flex align-items-center justify-content-center">
-            <img src="../assets/check.png" />
+            <img src="../assets/checked.png" v-if="category == 'sports'" />
+            <img src="../assets/check.png" v-else />
             <h3 class="name">Sports</h3>
           </div>
         </div>
-        <div class="category d-flex flex-column justify-content-between text-center">
+        <div
+          class="category d-flex flex-column justify-content-between text-center"
+          @click="onSetCategory('all')"
+        >
           <div>
             <img src="../assets/all.png" />
           </div>
           <div class="d-flex align-items-center justify-content-center">
-            <img src="../assets/check.png" />
+            <img src="../assets/checked.png" v-if="category == 'all'" />
+            <img src="../assets/check.png" v-else />
             <h3 class="name">All</h3>
           </div>
         </div>
       </div>
-      <div class="button mt-3" />
+      <div class="button" v-if="category != ''" />
     </div>
   </div>
 </template>
@@ -104,7 +136,8 @@ export default {
   data() {
     return {
       loading: true,
-      percent: 10
+      percent: 10,
+      category: ''
     }
   },
   created() {
@@ -119,6 +152,12 @@ export default {
         }, 1500);
       }
     }, 100);
+  },
+  methods: {
+    onSetCategory(value) {
+      console.log(value)
+      this.category = value;
+    }
   }
 };
 </script>
@@ -168,7 +207,7 @@ export default {
 }
 .play .content .category {
   cursor: pointer;
-  height: 220px;
+  height: 230px;
   margin-bottom: 30px;
   width: 250px;
 }
