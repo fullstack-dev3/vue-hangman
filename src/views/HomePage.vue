@@ -17,8 +17,83 @@
         </div>
       </div>
     </div>
-    <div v-else>
-
+    <div class="play" v-else>
+      <h1 class="title text-center pt-5">Select Category</h1>
+      <div class="content d-flex flex-wrap p-3 justify-content-center">
+        <div class="category d-flex flex-column justify-content-between text-center">
+          <div>
+            <img src="../assets/animals.png" />
+          </div>
+          <div class="d-flex align-items-center justify-content-center">
+            <img src="../assets/check.png" />
+            <h3 class="name">Animals</h3>
+          </div>
+        </div>
+        <div class="category d-flex flex-column justify-content-between text-center">
+          <div>
+            <img src="../assets/colors.png" />
+          </div>
+          <div class="d-flex align-items-center justify-content-center">
+            <img src="../assets/check.png" />
+            <h3 class="name">Colors</h3>
+          </div>
+        </div>
+        <div class="category d-flex flex-column justify-content-between text-center">
+          <div>
+            <img src="../assets/foods.png" />
+          </div>
+          <div class="d-flex align-items-center justify-content-center">
+            <img src="../assets/check.png" />
+            <h3 class="name">Foods</h3>
+          </div>
+        </div>
+        <div class="category d-flex flex-column justify-content-between text-center">
+          <div>
+            <img src="../assets/fruits.png" />
+          </div>
+          <div class="d-flex align-items-center justify-content-center">
+            <img src="../assets/check.png" />
+            <h3 class="name">Fruits</h3>
+          </div>
+        </div>
+        <div class="category d-flex flex-column justify-content-between text-center">
+          <div>
+            <img src="../assets/jobs.png" />
+          </div>
+          <div class="d-flex align-items-center justify-content-center">
+            <img src="../assets/check.png" />
+            <h3 class="name">Jobs</h3>
+          </div>
+        </div>
+        <div class="category d-flex flex-column justify-content-between text-center">
+          <div>
+            <img src="../assets/shapes.png" />
+          </div>
+          <div class="d-flex align-items-center justify-content-center">
+            <img src="../assets/check.png" />
+            <h3 class="name">Shapes</h3>
+          </div>
+        </div>
+        <div class="category d-flex flex-column justify-content-between text-center">
+          <div>
+            <img src="../assets/sports.png" />
+          </div>
+          <div class="d-flex align-items-center justify-content-center">
+            <img src="../assets/check.png" />
+            <h3 class="name">Sports</h3>
+          </div>
+        </div>
+        <div class="category d-flex flex-column justify-content-between text-center">
+          <div>
+            <img src="../assets/all.png" />
+          </div>
+          <div class="d-flex align-items-center justify-content-center">
+            <img src="../assets/check.png" />
+            <h3 class="name">All</h3>
+          </div>
+        </div>
+      </div>
+      <div class="button mt-3" />
     </div>
   </div>
 </template>
@@ -52,7 +127,7 @@ export default {
 .home {
   background-image: url('../assets/home.png');
   background-position: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 .loading {
   display: flex;
@@ -80,5 +155,37 @@ export default {
   color: green;
   font-size: 18px;
   height: 30px;
+}
+.play .title {
+  color: white;
+  font-family: cursive;
+  font-size: 50px;
+  font-weight: bold;
+}
+.play .content {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+.play .content .category {
+  cursor: pointer;
+  height: 220px;
+  margin-bottom: 30px;
+  width: 250px;
+}
+.play .content .category .name {
+  color: white;
+  font-family: system-ui;
+  margin-left: 20px;
+}
+.play .content .category:hover .name {
+  text-shadow: gray 2px 3px;
+}
+.play .button {
+  background: url('../assets/button.png') no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  height: 54px;
+  margin: 0 auto;
+  width: 150px;
 }
 </style>
