@@ -37,21 +37,13 @@
 <script>
 import { ref } from "vue";
 import SimpleKeyboard from "../components/SimpleKeyboard";
-
-const words = [
-  'apple',
-  'banana',
-  'cherry',
-  'grape',
-  'lemon',
-  'mango',
-  'orange',
-  'pineapple',
-  'peach',
-  'pear',
-  'strawberry',
-  'watermelon',
-];
+import animals from '../data/animals.json';
+import colors from '../data/colors.json';
+import foods from '../data/foods.json';
+import fruits from '../data/fruits.json';
+import jobs from '../data/jobs.json';
+import shapes from '../data/shapes.json';
+import sports from '../data/sports.json';
 
 export default {
   name: "PlayNow",
@@ -60,56 +52,78 @@ export default {
   },
   data() {
     return {
-      category: ''
+      tasks: [],
+      total: 0,
+      current: 0,
+      word: '',
+      letters: [],
+      rand1: 0,
+      rand2: 0,
+      count: 0
     }
   },
   created() {
-    this.category = this.$route.params.category;
-  },
-  setup: () => {
-    let total = 0;
-    const current = 0;
-    const tasks = [];
-    while (tasks.length < 5) {
+    const category = this.$route.params.category;
+    let words = [];
+
+    switch (category) {
+      case 'animals':
+        words = animals;
+        break;
+      case 'colors':
+        words = colors;
+        break;
+      case 'foods':
+        words = foods;
+        break;
+      case 'fruits':
+        words = fruits;
+        break;
+      case 'jobs':
+        words = jobs;
+        break;
+      case 'shapes':
+        words = shapes;
+        break;
+      case 'sports':
+        words = sports;
+        break;
+      case 'all':
+        words = animals.concat(colors, foods, fruits, jobs, shapes, sports);
+        break;
+    }
+
+    while (this.tasks.length < 5) {
       const task = words[Math.floor(Math.random() * (words.length - 1))];
-      if (!tasks.includes(task)) {
-        tasks.push(task);
-        total += task.length;
+      if (!this.tasks.includes(task)) {
+        this.tasks.push(task);
+        this.total += task.length;
       }
     }
 
-    const word = tasks[0];
+    this.word = this.tasks[0];
 
-    const rand1 = Math.floor(Math.random() * (word.length - 2)) + 1;
+    const rand1 = Math.floor(Math.random() * (this.word.length - 2)) + 1;
     let rand2 = -1;
-    if (word.length > 4) {
+    if (this.word.length > 4) {
       rand2 = rand1;
       while (rand1 == rand2) {
-        rand2 = Math.floor(Math.random() * (word.length - 2)) + 1;
+        rand2 = Math.floor(Math.random() * (this.word.length - 2)) + 1;
       }
     }
 
-    let letters = [];
-    for (let i = 0; i < word.length; i++) {
+    for (let i = 0; i < this.word.length; i++) {
       if (rand1 == i || rand2 == i) {
-        letters.push(word[i]);
+        this.letters.push(this.word[i]);
       } else {
-        letters.push('');
+        this.letters.push('');
       }
     }
 
-    const count = ref(0);
+    this.rand1 = rand1;
+    this.rand2 = rand2;
 
-    return {
-      tasks,
-      total,
-      current,
-      word,
-      letters,
-      rand1,
-      rand2,
-      count
-    }
+    this.count = ref(0);
   },
   methods: {
     onKeyPress(button) {
