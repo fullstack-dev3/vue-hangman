@@ -158,7 +158,7 @@ export default {
       this.category = value;
     },
     goToPlay() {
-      this.$router.push('/playnow')
+      this.$router.push(`/playnow/${this.category}`)
     }
   }
 };

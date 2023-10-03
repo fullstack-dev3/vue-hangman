@@ -9,10 +9,14 @@ const routes = [
     component: Home,
   },
   {
-    path: "/playnow",
+    path: "/playnow/:category",
     name: "PlayNow",
     component: PlayNow,
   },
+  {
+    path: '/:pathMatch(.*)*',
+    component: Home
+  }
 ];
 
 const router = createRouter({

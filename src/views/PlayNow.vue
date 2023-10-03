@@ -58,6 +58,14 @@ export default {
   components: {
     SimpleKeyboard
   },
+  data() {
+    return {
+      category: ''
+    }
+  },
+  created() {
+    this.category = this.$route.params.category;
+  },
   setup: () => {
     let total = 0;
     const current = 0;
