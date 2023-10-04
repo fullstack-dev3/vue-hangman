@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "@/views/HomePage.vue";
 import PlayNow from "@/views/PlayNow.vue";
+import PlayWords from "@/views/PlayWords.vue";
 
 const routes = [
   {
@@ -9,9 +10,14 @@ const routes = [
     component: Home,
   },
   {
-    path: "/playnow/:category",
+    path: "/playnow",
     name: "PlayNow",
     component: PlayNow,
+  },
+  {
+    path: "/playnow/:category",
+    name: "PlayWords",
+    component: PlayWords,
   },
   {
     path: '/:pathMatch(.*)*',
