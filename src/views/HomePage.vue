@@ -142,7 +142,7 @@ export default {
   text-shadow: gray 2px 3px;
 }
 .play .button {
-  background: url('../assets/button.png') no-repeat;
+  background: url('../assets/play.png') no-repeat;
   background-size: cover;
   cursor: pointer;
   height: 54px;
