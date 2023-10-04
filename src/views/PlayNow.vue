@@ -1,24 +1,30 @@
 <template>
-  <div class="container">
-    <div class="mt-3 reset">
-      <button class="btn btn-primary" v-if="count > 0 && current != total" @click="onReset">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-          <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-        </svg>
-        Reset
-      </button>
+  <div class="container d-flex flex-column justify-content-between py-5">
+    <div class="d-flex align-items-center justify-content-center">
+      <img :src="getImgUrl(category)" v-bind:alt="category">
+      <h1 class="title">{{ category }}</h1>
     </div>
-    <div class="progress mt-3">
-      <div
-        class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-        role="progressbar"
-        :aria-valuenow="Math.floor(current / total * 100)"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        :style="'width: ' + Math.floor(current / total * 100) + '%'"
-      >
-        {{ Math.floor(current / total * 100) }}%
+    <div>
+      <div class="mt-3 reset">
+        <button class="btn btn-primary" v-if="count > 0 && current != total" @click="onReset">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+          </svg>
+          Reset
+        </button>
+      </div>
+      <div class="progress mt-3">
+        <div
+          class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+          role="progressbar"
+          :aria-valuenow="Math.floor(current / total * 100)"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          :style="'width: ' + Math.floor(current / total * 100) + '%'"
+        >
+          {{ Math.floor(current / total * 100) }}%
+        </div>
       </div>
     </div>
     <div class="word">
@@ -52,6 +58,7 @@ export default {
   },
   data() {
     return {
+      category: '',
       tasks: [],
       total: 0,
       current: 0,
@@ -63,10 +70,10 @@ export default {
     }
   },
   created() {
-    const category = this.$route.params.category;
+    this.category = this.$route.params.category;
     let words = [];
 
-    switch (category) {
+    switch (this.category) {
       case 'animals':
         words = animals;
         break;
@@ -126,6 +133,10 @@ export default {
     this.count = ref(0);
   },
   methods: {
+    getImgUrl(url) {
+      const images = require.context('../assets/', false, /\.png$/);
+      return images('./' + url + ".png");
+    },
     onKeyPress(button) {
       if (this.count < this.letters.length) {
         this.letters[this.count] = button;
@@ -205,6 +216,17 @@ export default {
 </script>
 
 <style>
+.container {
+  min-height: 100vh;
+}
+.title {
+  color: white;
+  font-family: cursive;
+  font-size: 50px;
+  font-weight: bold;
+  margin-left: 20px;
+  text-transform: capitalize;
+}
 .reset {
   min-height: 50px;
 }
@@ -220,7 +242,7 @@ export default {
 }
 .letter {
   border-bottom: 4px solid gold;
-  color: green;
+  color: gold;
   font-size: 45px;
   height: 50px;
   line-height: 45px;
